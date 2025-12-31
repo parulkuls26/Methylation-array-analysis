@@ -1,27 +1,25 @@
-Methylation Array Analysis Pipeline
-
+**Methylation Array Analysis Pipeline**
 An R-based workflow for analyzing Illumina 450K methylation array data, including preprocessing, quality control, differential methylation analysis, and visualization.
 
-The full Analysis report with codes can be found here:
+**The full Analysis report with codes can be found here:**
 
 The https://parulkuls26.github.io/Methylation-array-analysis/methylation_array_analysis-2024.html
 
-Overview
+**Overview**
 This repository provides tools and scripts for comprehensive analysis of DNA methylation data from Illumina HumanMethylation450 BeadChip arrays. The pipeline covers:
 
-Data import and preprocessing
-Quality control and normalization
-Differential methylation analysis at probe and region levels
-Visualization and annotation of results
+1.Data import and preprocessing
+2.Quality control and normalization
+3.Differential methylation analysis at probe and region levels
+4.Visualization and annotation of results
 
-Requirements
+**Requirements**
 RStudio
 R Version
 R >= 4.0.0 recommended
 
-Dependencies
+**Dependencies**
 Bioconductor packages:
-
 limma
 minfi
 IlluminaHumanMethylation450kanno.ilmn12.hg19
@@ -39,13 +37,19 @@ stringr
 matrixStats
 
 Package Descriptions
+
 Methylation-Specific Packages
 
 minfi — Core package for reading, preprocessing, and analyzing 450K array data
+
 IlluminaHumanMethylation450kanno.ilmn12.hg19 — Annotation package for 450K probes (hg19 genome)
+
 IlluminaHumanMethylation450kmanifest — Provides the Illumina manifest as an R object containing all annotation information for each CpG probe on the 450K array, useful for determining the genomic context of differentially methylated probes
+
 missMethyl — Gene ontology and KEGG pathway analysis designed specifically for methylation data
+
 minfiData — Example datasets for testing and tutorials
+
 DMRcate — Identification of differentially methylated regions (DMRs)
 
 Visualization Packages
