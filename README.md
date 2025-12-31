@@ -1,6 +1,11 @@
 Methylation Array Analysis Pipeline
 
 An R-based workflow for analyzing Illumina 450K methylation array data, including preprocessing, quality control, differential methylation analysis, and visualization.
+
+The full Analysis report with codes can be found here:
+
+The https://parulkuls26.github.io/Methylation-array-analysis/methylation_array_analysis-2024.html
+
 Overview
 This repository provides tools and scripts for comprehensive analysis of DNA methylation data from Illumina HumanMethylation450 BeadChip arrays. The pipeline covers:
 
@@ -10,9 +15,10 @@ Differential methylation analysis at probe and region levels
 Visualization and annotation of results
 
 Requirements
-Requirements
+RStudio
 R Version
 R >= 4.0.0 recommended
+
 Dependencies
 Bioconductor packages:
 
