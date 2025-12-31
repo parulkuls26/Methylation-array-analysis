@@ -10,11 +10,28 @@ Differential methylation analysis at probe and region levels
 Visualization and annotation of results
 
 Requirements
+Requirements
 R Version
 R >= 4.0.0 recommended
 Dependencies
-Bioconductor packages: limma, minfi, IlluminaHumanMethylation450kanno.ilmn12.hg19, IlluminaHumanMethylation450kmanifest, missMethyl, minfiData, Gviz, DMRcate
-CRAN packages: knitr, RColorBrewer, stringr, matrixStats
+Bioconductor packages:
+
+limma
+minfi
+IlluminaHumanMethylation450kanno.ilmn12.hg19
+IlluminaHumanMethylation450kmanifest
+missMethyl
+minfiData
+Gviz
+DMRcate
+
+CRAN packages:
+
+knitr
+RColorBrewer
+stringr
+matrixStats
+
 Package Descriptions
 Methylation-Specific Packages
 
