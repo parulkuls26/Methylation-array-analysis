@@ -1,0 +1,134 @@
+Methylation Array Analysis Pipeline
+An R-based workflow for analyzing Illumina 450K methylation array data, including preprocessing, quality control, differential methylation analysis, and visualization.
+Overview
+This repository provides tools and scripts for comprehensive analysis of DNA methylation data from Illumina HumanMethylation450 BeadChip arrays. The pipeline covers:
+
+Data import and preprocessing
+Quality control and normalization
+Differential methylation analysis at probe and region levels
+Visualization and annotation of results
+
+Requirements
+R Version
+R >= 4.0.0 recommended
+Dependencies
+Bioconductor packages: limma, minfi, IlluminaHumanMethylation450kanno.ilmn12.hg19, IlluminaHumanMethylation450kmanifest, missMethyl, minfiData, Gviz, DMRcate
+CRAN packages: knitr, RColorBrewer, stringr, matrixStats
+Package Descriptions
+Methylation-Specific Packages
+
+minfi — Core package for reading, preprocessing, and analyzing 450K array data
+IlluminaHumanMethylation450kanno.ilmn12.hg19 — Annotation package for 450K probes (hg19 genome)
+IlluminaHumanMethylation450kmanifest — Provides the Illumina manifest as an R object containing all annotation information for each CpG probe on the 450K array, useful for determining the genomic context of differentially methylated probes
+missMethyl — Gene ontology and KEGG pathway analysis designed specifically for methylation data
+minfiData — Example datasets for testing and tutorials
+DMRcate — Identification of differentially methylated regions (DMRs)
+
+Visualization Packages
+
+RColorBrewer — Color palettes for visualizations
+Gviz — Visualization of genomic data and methylation tracks
+
+Statistical Testing
+
+limma — Linear models for testing differential methylation
+
+Utility Packages
+
+knitr — Report generation and reproducible research
+matrixStats — Fast row/column operations on matrices used throughout the workflow
+stringr — String manipulation functions used in the workflow
+
+Project Structure
+
+R/ — R scripts and functions
+data/ — Raw and processed data (IDAT files, sample sheets)
+results/ — Analysis outputs (CSV files, DMPs, DMRs)
+figures/ — Generated plots and visualizations
+reports/ — Knitted HTML/PDF reports
+README.md — Project documentation
+
+Analysis Workflow
+1. Data Import
+
+Sample Sheet: Read sample metadata containing sample names, chip IDs, positions, and experimental groups
+IDAT Files: Load raw red and green channel intensity data into an RGChannelSet object
+
+2. Quality Control
+
+Detection P-values: Calculate detection p-values to assess signal quality at each probe
+Mean Detection P-values: Examine per-sample quality to identify failed samples
+QC Report: Generate comprehensive PDF report with density plots, control probe performance, and sex prediction
+
+3. Sample and Probe Filtering
+
+Remove Failed Samples: Exclude samples with mean detection p-value > 0.05
+Remove Failed Probes: Filter probes with detection p-value > 0.01 in any sample
+Remove Sex Chromosome Probes: Exclude chrX and chrY probes when analyzing mixed-sex samples
+Remove SNP-Affected Probes: Filter probes where SNPs may affect CpG measurement
+Remove Cross-Reactive Probes: Exclude probes that map to multiple genomic locations (Chen et al., 2013)
+
+Filtering Summary:
+
+Initial (after normalization) — 484,535 probes
+Failed detection p-value — 977 probes removed → 484,535 remaining
+Sex chromosomes — 11,608 probes removed → 472,927 remaining
+SNP-affected probes — ~17,000 probes removed → 455,924 remaining
+Cross-reactive probes — 26,527 probes removed → 429,397 remaining
+
+4. Preprocessing and Normalization
+
+Quantile Normalization: Apply stratified quantile normalization using preprocessQuantile()
+MDS Plots: Visualize sample relationships and identify batch effects or outliers
+M-values and Beta Values: Extract M-values for statistical analysis and beta values for visualization
+
+5. Data Exploration
+
+MDS Plots: Examine principal components to identify sources of variation
+Density Plots: Compare distributions of beta and M-values across samples
+Higher Dimensions: Explore PC3, PC4 to identify additional variation sources
+
+6. Differential Methylation Analysis (Probe-Level)
+
+Design Matrix: Create model including cell type (factor of interest) and individual (blocking factor)
+Contrast Matrix: Define pairwise comparisons between groups
+Linear Model: Fit limma model to M-values
+Empirical Bayes: Apply eBayes moderation for improved statistical power
+Results Extraction: Get differentially methylated probes (DMPs) with annotation
+
+DMP Results Include:
+
+logFC: Log2 fold change in M-values
+P.Value: Raw p-value
+adj.P.Val: FDR-adjusted p-value
+Annotation: Gene names, chromosome, CpG island relation
+
+7. Differential Methylation Analysis (Region-Level)
+
+CpG Annotation: Annotate probes with genomic coordinates and statistics using DMRcate
+DMR Identification: Identify differentially methylated regions using kernel smoothing
+Visualization: Plot DMRs with gene tracks, CpG islands, and sample methylation values
+
+DMR Results Table Columns:
+
+width — Size of the DMR in base pairs
+no.cpgs — Number of CpG probes within the DMR
+min_smoothed_fdr — Minimum smoothed FDR across CpGs in the region
+Stouffer — Stouffer's combined p-value from all CpGs in the region
+HMFDR — Harmonic mean FDR
+Fisher — Fisher's combined p-value
+maxdiff — Maximum beta value difference between groups
+meandiff — Mean beta value difference across all CpGs in the DMR
+overlapping.genes — Genes that overlap with the DMR
+
+Interpreting meandiff:
+
+Positive values: Hypermethylation in the first group compared to the second
+Negative values: Hypomethylation in the first group compared to the second
+
+Output Files
+
+DMPs.csv — Differentially methylated probes with annotation
+DMR_results.csv — Differentially methylated regions summary
+qcReport.pdf — Quality control report
+
