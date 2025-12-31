@@ -150,3 +150,26 @@ DMPs.csv — Differentially methylated probes with annotation
 DMR_results.csv — Differentially methylated regions summary
 qcReport.pdf — Quality control report
 
+Key Findings
+Differentially Methylated Regions (DMRs)
+The analysis identified several significant DMRs between naive and rTreg cell types. Top DMRs include:
+
+TIGIT — 5 CpGs, 597 bp, maxdiff = 54.3% methylation difference
+PHF1, CUTA — 14 CpGs, 1903 bp, maxdiff = 54.7% methylation difference (shown in DMR plot on Chromosome 6)
+TNFRSF8 — 3 CpGs, 136 bp, maxdiff = 37.4% methylation difference
+ZC3H12D — 10 CpGs, 738 bp, maxdiff = 48.8% methylation difference
+SLC9A1 — 3 CpGs, 259 bp, maxdiff = -45.3% (hypomethylated)
+LAMA3 — 7 CpGs, 402 bp, maxdiff = -38.7% (hypomethylated)
+ANKRD11 — 7 CpGs, 513 bp, maxdiff = 32.4% methylation difference
+DUSP6 — 11 CpGs, 1405 bp, maxdiff = -29.2% (hypomethylated)
+NTRK1, SH2D2A — 6 CpGs, 1859 bp, maxdiff = 38.7% methylation difference
+LTBR, SCNN1A — 10 CpGs, 1544 bp, maxdiff = -34.2% (hypomethylated)
+
+Key Observations
+
+All DMRs showed extremely high statistical significance (p-values ranging from 10⁻¹⁰⁵ to 10⁻²⁰⁰)
+Both hypermethylation (positive meandiff) and hypomethylation (negative meandiff) patterns were observed
+The PHF1/CUTA region on Chromosome 6 showed clear separation between rTreg samples (higher methylation) and other cell types
+Inter-individual variation was the largest source of variation but was effectively controlled by including individual as a blocking factor in the statistical model
+
+
